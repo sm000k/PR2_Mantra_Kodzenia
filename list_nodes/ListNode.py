@@ -1,16 +1,16 @@
 from functools import singledispatchmethod
-from typing import List
+from typing import List, Union, Iterable
 
 import self
 
 
 class ListNode:
     @singledispatchmethod
-    def __init__(self):
-        # This is the default implementation. Runs when the data type is not registered.
+    def __init__(self, input_val: Union[Iterable, int]):
         raise ValueError("This data type is not supported.")
 
-    def __init__( iterk):
+    @__init__.register
+    def init_iter(self, iterk):
 
         try:
             temp = next(iterk)
@@ -21,14 +21,14 @@ class ListNode:
         except StopIteration:
             pass
 
-    def __init__(self, value, next=None):
+    @__init__.register(int)
+    def costam(self, value):
         self.val = value
         print(self.val)
-        self.next = next
 
 
 if __name__ == "__main__":
     # heed = ListNode(iter([1, 2, 3, 4, 5]))
-    # hed = ListNode(10)
-    x = iter([1, 2, 3, 4, 5])
-    isinstance(iter, (x,x))
+    hed = ListNode(10)
+    # x = iter([1, 2, 3, 4, 5])
+    # isinstance(iter, (x,x))
